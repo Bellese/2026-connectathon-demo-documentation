@@ -7,17 +7,17 @@ This repository contains the documentation, resources, and reference configurati
 ## Important Links
 <ul>
   <li>
-    <a href="https://confluence.hl7.org/spaces/FHIR/pages/477660436/2026+-+09+CMS+Quality+Reporting+Hospital+Quality+Reporting+HQR+End-to-End+Submission+Track">Connectathon Track Page</a>
+    <a href="https://confluence.hl7.org/spaces/FHIR/pages/477660436/2026+-+09+CMS+Quality+Reporting+Hospital+Quality+Reporting+HQR+End-to-End+Submission+Track" target="_blank">Connectathon Track Page</a>
   </li>
   <li>
-    <a href="https://bellese.github.io/hqr-ig/data-element-testing-guide.html">Draft Implementation Guide</a>
+    <a href="https://bellese.github.io/hqr-ig/data-element-testing-guide.html" target="_blank">Draft Implementation Guide</a>
   </li>
   <li>
-    <a href="https://fhir-connectathon.test.cms.gov/start?code=99Z6-R66H">Temporary public test environment</a>
+    <a href="https://fhir-connectathon.test.cms.gov/start?code=99Z6-R66H" target="_blank">Temporary public test environment</a>
     <i> - Note: This environment will only be accessible during the Connectathon.</i>
   </li>
   <li>
-    <a href="#">Postman Collection</a>
+    <a href="#" target="_blank">Download the Postman Collection</a>
   </li>
 </ul>
 
