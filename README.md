@@ -4,8 +4,8 @@ September 2026 Connectathon
 ## Welcome
 This repository contains the documentation, resources, and reference configurations for the CMS Hospital Quality Reporting (HQR) End-to-End Submission Track at the September 2026 HL7 Connectathon. Participants can use this as a guide to follow along the technical demo and/or deep-dive on specific artifacts or resources. 
 
-## What You'll Accomplish
-In this demo, you will:
+## Overview
+In this demo, you can:
 1. Configure the Postman collection and authenticate with the HQR Receiver. 
 2. Select one of the provided sample clinical datasets and measures. 
 3. Submit the clinical data and `MeasureReport` using the DEQM `$submit-data` operation. 
