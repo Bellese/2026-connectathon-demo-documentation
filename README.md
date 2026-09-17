@@ -58,15 +58,15 @@ We have prepared sample, synthetic clinical data for three distinct measures for
 
 - CMS71 - (STK-3): Anticoagulation Therapy for Atrial Fibrillation Flutter - It assess ischemic stroke patients who are prescribed or continuing anticoagulation therapy at hospital discharge.
 - CMS506: Safe Use of Opioids - Tracks the proportion of hospital patients aged 18 and older who are prescribed two or more opioids or an opioid and a benzodiazepine concurrently at discharge.
-- EXMConnectathonSetp2026Simple: This is a sample measure that is designed with as much simplicity as possible to allow for the easiest demonstration of the end-to-end data flow. 
+- EXMConnectathonSept2026Simple: This is a sample measure that is designed with as much simplicity as possible to allow for the easiest demonstration of the end-to-end data flow. 
 
 Once the data is downloaded, copy the contents of the file, then open the `POST $submit-data` section in the left navigation of Postman and paste the data into the "Body" tab to prepare for submission.
 
 ### Data Submission
 In the `POST $submit-data` section, update the variable `measureId` to match the canonical ID or resource ID of the measure you are submitting.
 
-For example, when using `EXMConnectathonSetp2026Simple` simple measure: 
-`measureId` = `EXMConnectathonSetp2026Simple`
+For example, when using `EXMConnectathonSept2026Simple` simple measure: 
+`measureId` = `EXMConnectathonSept2026Simple`
 
 Once everything has been correctly entered, click "Send" to submit the request.
 
@@ -136,7 +136,7 @@ Content-Type: application/fhir+json
         "resourceType": "MeasureReport",
         "status": "complete",
         "type": "summary",
-        "measure": "http://cms.gov/hqr/Measure/EXMConnectathonSetp2026Simple",
+        "measure": "http://cms.gov/hqr/Measure/EXMConnectathonSept2026Simple",
         "period": {
           "start": "2026-01-01",
           "end": "2026-03-31"
@@ -175,7 +175,7 @@ If you are using an EHR developer sandbox as your clinical data source, the proc
 **Extract Clinical Data from Your EHR Sandbox:**
 
 * Authenticate against your EHR's FHIR R4 endpoint using your sandbox app registration.
-* Query the US Core resources (Patient, Encounter, Observation, Condition) required for your selected measure (CMS71, CMS506, or EXMConnectathonSetp2026Simple).
+* Query the US Core resources (Patient, Encounter, Observation, Condition) required for your selected measure (CMS71, CMS506, or EXMConnectathonSept2026Simple).
 
 
 **Assemble the DEQM `$submit-data` Payload:**
