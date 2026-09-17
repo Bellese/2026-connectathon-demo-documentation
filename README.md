@@ -25,7 +25,7 @@ In this demo, you can:
     <i> - Note: This environment will only be accessible during the Connectathon.</i>
   </li>
   <li>
-    <a href="#">Postman Collection</a>
+    <a href="https://github.com/Bellese/2026-connectathon-demo-documentation/blob/main/postman/hqr-connectathon-demo-postman-collection.json">Postman Collection</a>
   </li>
 </ul>
 
@@ -36,8 +36,8 @@ In this demo, you can:
 This is a companion Postman collection for the September 2026 HL7 Connectathon [CMS Quality Reporting: Hospital Quality Reporting (HQR) End-to-End Submission Tack](https://confluence.hl7.org/spaces/FHIR/pages/477660436/2026+-+09+CMS+Quality+Reporting+Hospital+Quality+Reporting+HQR+End-to-End+Submission+Track). This demo is meant to illustrate some of the initial concepts and data exchange in the [Draft FHIR Implementation Guide](https://bellese.github.io/hqr-ig/index.html).
 
 ### Initial Environment Setup
-1. Download the Postman Collection: `Download the HQR_Connectathon_Demo.postman_collection.json` file from the `/postman` directory in this repository to your local machine.
 2. Import Into Postman: Open Postman, click the Import button in the top-left header bar, and drag-and-drop the downloaded .json file into the upload window (or click Choose Files) to load the requests into your active workspace.
+1. Download the Postman Collection: Download the `hqr-connectathon-demo-postman-collection.json` file from the `/postman` directory in this repository to your local machine.
 3. [Navigate to the demo environment](https://fhir-connectathon.test.cms.gov/start?code=99Z6-R66H) and get credentials by following the instructions on the page.
 4. Navigate to the "Variables" section of this collection in the top bar. Populate the variable url field with `https://fhir-connectathon.test.cms.gov`.
 5. Populate the "Authorization" tab with your `clientid` and `clientSecret` that you collected from the demo environment interface.
