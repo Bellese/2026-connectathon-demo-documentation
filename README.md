@@ -41,7 +41,6 @@ This is a companion Postman collection for the September 2026 HL7 Connectathon [
 3. [Navigate to the demo environment](https://fhir-connectathon.test.cms.gov/start?code=99Z6-R66H) and get credentials by following the instructions on the page.
 4. Navigate to the "Variables" section of this collection in the top bar. Populate the variable url field with `https://fhir-connectathon.test.cms.gov`.
 5. Populate the "Authorization" tab with your `clientid` and `clientSecret` that you collected from the demo environment interface.
-6. Run the `POST` token now. This should set your `access_token` variable so you can freely call the FHIR sandbox server. Note: In this sample scenario, the FHIR sandbox is both the "submitter system" and the "HQR receiver" that is mentioned in the Implementation Guide.
 
 Postman variables needed to accomplish the task:
 
