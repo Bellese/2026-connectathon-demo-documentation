@@ -6,10 +6,10 @@ This repository contains the documentation, resources, and reference configurati
 
 ## Overview
 In this demo, you can:
-1. Configure the Postman collection and authenticate with the HQR Receiver of use a custom application or CLI. 
+1. Configure the Postman collection and authenticate with the HQR Receiver or use a custom application or CLI. 
 2. Select one of the provided sample clinical datasets and measures. 
 3. Submit the clinical data and `MeasureReport` using the DEQM `$submit-data` operation. 
-4. Review the response and validate whether the submission was accepted or returned a FHIR OperationOutcome. 
+4. Review the response and validate whether the submission was accepted or returned a FHIR `OperationOutcome`. 
 5. Optionally run `$evaluate-measure` to generate a `MeasureReport` and compare the result with the submitted test data. 
 
 ## Important Links
@@ -60,12 +60,12 @@ We have prepared sample, synthetic clinical data for three distinct measures for
 - CMS506: Safe Use of Opioids - Tracks the proportion of hospital patients aged 18 and older who are prescribed two or more opioids or an opioid and a benzodiazepine concurrently at discharge.
 - EXMConnectathonSetp2026Simple: This is a sample measure that is designed with as much simplicity as possible to allow for the easiest demonstration of the end-to-end data flow. 
 
-Once the data is downloaded, copy the contents of the file, then open the `POST $submit-data` section in the left navigation of Postman and paste the data into , in the "Body" tab to prepare for submission.
+Once the data is downloaded, copy the contents of the file, then open the `POST $submit-data` section in the left navigation of Postman and paste the data into the "Body" tab to prepare for submission.
 
 ### Data Submission
 In the `POST $submit-data` section, update the variable `measureId` to match the canonical ID or resource ID of the measure you are submitting.
 
-Set the `measureId` variable to the identifier for the measure being submitted. For example, when using `EXMConnectathonSetp2026Simple` simple measure: 
+For example, when using `EXMConnectathonSetp2026Simple` simple measure: 
 `measureId` = `EXMConnectathonSetp2026Simple`
 
 Once everything has been correctly entered, click "Send" to submit the request.
@@ -79,12 +79,12 @@ The response validates conformance and gives a detailed message if the data is i
 
 **HTTP 400 Bad Request / 422 Unprocessable Entity (Validation Error):** 
 - The payload failed schema validation, profile alignment checks, or slicing rules.
-- The response body returns a FHIR OperationOutcome resource. Inspect `OperationOutcome.issue[].diagnostics` and `OperationOutcome.issue[].expression` to locate the exact JSON path and rule violation (e.g., missing mandatory `period.start` or mismatched code system). Note: A potential alternative is "Upload this data to the sandbox using the "POST resource batch" call in the collection". This is an open discussion topic.
+- The response body returns a FHIR `OperationOutcome` resource. Inspect `OperationOutcome.issue[].diagnostics` and `OperationOutcome.issue[].expression` to locate the exact JSON path and rule violation (e.g., missing mandatory `period.start` or mismatched code system). Note: A potential alternative is "Upload this data to the sandbox using the "POST resource batch" call in the collection". This is an open discussion topic.
 
 ### Additional Steps
 If you want to compare the test data `MeasureReport` to a live generated `MeasureReport` on the population, use the `GET $evaluate-measure` request and update the `measureId` variable.
 
-The `helpers` folder has additional that may be helpful to explore/navigate the FHIR server.
+The `helpers` folder has additional requests that may be helpful to explore/navigate the FHIR server.
 
 ## Using Custom Applications or Alternative REST Clients
 
@@ -112,13 +112,13 @@ curl -X POST https://fhir-connectathon.test.cms.gov/oauth/token \
   -d "grant_type=client_credentials"
 ```
 
-Save the access_token returned in the JSON response to authorize subsequent FHIR API requests. 
+Save the `access_token` returned in the JSON response to authorize subsequent FHIR API requests. 
 
 Note: If you are executing manual terminal commands, background auto-refresh is not available. If your access token expires after one hour (which will result in a 401 Unauthorized error), you will need to either re-run the initial token request workflow or execute a specific token refresh command to obtain a new valid token.
 
 ### Data Submission
 
-Submit your sample FHIR MeasureReport payload to the receiver using an HTTP POST to the $submit-data endpoint.
+Submit your sample FHIR `measureReport` payload to the receiver using an HTTP POST to the `$submit-data` endpoint.
 
 **HTTP Example:**
 
