@@ -86,7 +86,136 @@ If you want to compare the test data `MeasureReport` to a live generated `Measur
 
 The `helpers` folder has additional that may be helpful to explore/navigate the FHIR server.
 
-## Open Questions + How to Get Involved
-[Content TBD]
+## Using Custom Applications or Alternative REST Clients
 
+While the provided Postman collection offers a way to quickly get started with the demo, you can also use custom scripts (Python, Node.js, C#), command-line utilities (`curl`), or alternative REST clients (Insomnia, Bruno) to walk through the exact same flow by targeting the raw HTTP endpoints directly.
+
+### Authentication
+
+This follows the exact same steps as the Postman process, by navigating to the public demo environment and getting a `clientID` and `clientSecret` if you haven't already generated these credentials. Next you will request a Bearer token from the OAuth authorization server:
+
+**HTTP Example:**
+
+```
+POST https://fhir-connectathon.test.cms.gov/oauth/token
+Authorization: Basic <base64(clientId:clientSecret)>
+Content-Type: application/x-www-form-urlencoded
+```
+
+grant_type=client_credentials
+
+**cURL Example (Bash):**
+
+```
+curl -X POST https://fhir-connectathon.test.cms.gov/oauth/token \
+  -u "your_client_id:your_client_secret" \
+  -d "grant_type=client_credentials"
+```
+
+Save the access_token returned in the JSON response to authorize subsequent FHIR API requests. 
+
+Note: If you are executing manual terminal commands, background auto-refresh is not available. If your access token expires after one hour (which will result in a 401 Unauthorized error), you will need to either re-run the initial token request workflow or execute a specific token refresh command to obtain a new valid token.
+
+### Data Submission
+
+Submit your sample FHIR MeasureReport payload to the receiver using an HTTP POST to the $submit-data endpoint.
+
+**HTTP Example:**
+
+```
+POST https://fhir-connectathon.test.cms.gov/fhir/Measure/$submit-data
+Authorization: Bearer <access_token>
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "measureReport",
+      "resource": {
+        "resourceType": "MeasureReport",
+        "status": "complete",
+        "type": "summary",
+        "measure": "http://cms.gov/hqr/Measure/EXMConnectathonSetp2026Simple",
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-03-31"
+        }
+      }
+    }
+  ]
+}
+```
+
+**cURL Example (Bash):**
+
+```
+curl -X POST https://fhir-connectathon.test.cms.gov/fhir/Measure/$submit-data \
+  -H "Authorization: Bearer <access_token>" \
+  -H "Content-Type: application/fhir+json" \
+  -d "@sample_payload.json"
+```
+
+### Optional: Execute Measure Evaluation ($evaluate-measure)
+
+To trigger live measure logic calculation against patient data already stored on the FHIR server, issue a GET or POST request to $evaluate-measure:
+
+**HTTP Example:**
+
+```
+GET https://fhir-connectathon.test.cms.gov/fhir/Measure/CMS71/$evaluate-measure?periodStart=2026-01-01&periodEnd=2026-03-31&reportType=summary
+Authorization: Bearer <access_token>
+Accept: application/fhir+json
+```
+
+## Walking Through the Demo with an EHR Sandbox (e.g., Epic / Cerner)
+
+If you are using an EHR developer sandbox as your clinical data source, the process might look slightly different for you:
+
+**Extract Clinical Data from Your EHR Sandbox:**
+
+* Authenticate against your EHR's FHIR R4 endpoint using your sandbox app registration.
+* Query the US Core resources (Patient, Encounter, Observation, Condition) required for your selected measure (CMS71, CMS506, or EXMConnectathonSetp2026Simple).
+
+
+**Assemble the DEQM `$submit-data` Payload:**
+
+* Package your extracted resources into a FHIR `Parameters` resource wrapping a DEQM `MeasureReport`.
+* Set `MeasureReport.reporter` to reference an `Organization` resource containing your test facility CCN.
+
+
+**Authenticate & Submit to the HQR Receiver:**
+
+You will need to obtain an HQR access token.
+
+**HTTP Example:**
+
+```
+POST https://fhir-connectathon.test.cms.gov/oauth/token
+
+Authorization: Basic <base64(clientId:clientSecret)>
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+```
+
+Then you can push your assembled payload to HQR:
+
+**HTTP Example:**
+
+```
+POST https://fhir-connectathon.test.cms.gov/fhir/Measure/$submit-data
+Authorization: Bearer <hqr_access_token>
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "measureReport",
+      "resource": { ... }
+    }
+  ]
+}
+```
 
