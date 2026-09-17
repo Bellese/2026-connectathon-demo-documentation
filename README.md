@@ -6,7 +6,7 @@ This repository contains the documentation, resources, and reference configurati
 
 ## Overview
 In this demo, you can:
-1. Configure the Postman collection and authenticate with the HQR Receiver. 
+1. Configure the Postman collection and authenticate with the HQR Receiver of use a custom application or CLI. 
 2. Select one of the provided sample clinical datasets and measures. 
 3. Submit the clinical data and `MeasureReport` using the DEQM `$submit-data` operation. 
 4. Review the response and validate whether the submission was accepted or returned a FHIR OperationOutcome. 
